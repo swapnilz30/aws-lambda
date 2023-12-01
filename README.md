@@ -1,4 +1,5 @@
 # aws-lambda
+Check the following instructions for <b>"python-s3-thumbnail-lambda"</b> function
 1. Create the Access and Secret Keys for the AWS user account. <br>
 2. Install sls, serverless-python-requirements (use sls install command to install this plugin) <br>
 3. Clone this repository. <br>
