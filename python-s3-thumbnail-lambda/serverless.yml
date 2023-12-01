@@ -1,0 +1,40 @@
+service: python-s3-thumbnail
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+  region: us-east-1
+  profile: default
+  stage: dev
+  timeout: 10
+  memorySize: 128
+  environment:
+    THUMBNAIL_SIZE: 128
+    REGION_NAME: ${self:provider.region}
+
+  iam:
+    role:
+      statements:
+        - Effect: 'Allow'
+          Resource: '*'
+          Action: 's3:*'
+
+custom:
+  bucket: paulo-thumbnails-bucket-123
+  pythonRequirements:
+    dockerizePip: true
+
+functions:
+  s3_thumbnail_generator:
+    handler: handler.s3_thumbnail_generator
+    events:
+      - s3:
+          bucket: ${self:custom.bucket}
+          event: s3:ObjectCreated:*
+          rules:
+            - suffix: .png
+
+plugins:
+    - serverless-python-requirements
