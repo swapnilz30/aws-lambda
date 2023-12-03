@@ -121,6 +121,12 @@
               "LogGroupName": "/aws/lambda/lambda-aws-python-http-api-dev-get"
             }
           },
+          "AllLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/lambda-aws-python-http-api-dev-all"
+            }
+          },
           "UpdateLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
@@ -221,7 +227,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/lambda-aws-python-http-api/dev/1701586188311-2023-12-03T06:49:48.311Z/lambda-aws-python-http-api.zip"
+                "S3Key": "serverless/lambda-aws-python-http-api/dev/1701617482517-2023-12-03T15:31:22.517Z/lambda-aws-python-http-api.zip"
               },
               "Handler": "handler.create",
               "Runtime": "python3.9",
@@ -258,7 +264,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/lambda-aws-python-http-api/dev/1701586188311-2023-12-03T06:49:48.311Z/lambda-aws-python-http-api.zip"
+                "S3Key": "serverless/lambda-aws-python-http-api/dev/1701617482517-2023-12-03T15:31:22.517Z/lambda-aws-python-http-api.zip"
               },
               "Handler": "handler.get",
               "Runtime": "python3.9",
@@ -285,6 +291,40 @@
               "GetLogGroup"
             ]
           },
+          "AllLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/lambda-aws-python-http-api/dev/1701617482517-2023-12-03T15:31:22.517Z/lambda-aws-python-http-api.zip"
+              },
+              "Handler": "handler.all",
+              "Runtime": "python3.9",
+              "FunctionName": "lambda-aws-python-http-api-dev-all",
+              "MemorySize": 128,
+              "Timeout": 10,
+              "Architectures": [
+                "x86_64"
+              ],
+              "Environment": {
+                "Variables": {
+                  "DYNAMODB_TABLE": "test-table",
+                  "REGION_NAME": "us-east-1"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "AllLogGroup"
+            ]
+          },
           "UpdateLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
@@ -292,7 +332,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/lambda-aws-python-http-api/dev/1701586188311-2023-12-03T06:49:48.311Z/lambda-aws-python-http-api.zip"
+                "S3Key": "serverless/lambda-aws-python-http-api/dev/1701617482517-2023-12-03T15:31:22.517Z/lambda-aws-python-http-api.zip"
               },
               "Handler": "handler.update",
               "Runtime": "python3.9",
@@ -326,7 +366,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/lambda-aws-python-http-api/dev/1701586188311-2023-12-03T06:49:48.311Z/lambda-aws-python-http-api.zip"
+                "S3Key": "serverless/lambda-aws-python-http-api/dev/1701617482517-2023-12-03T15:31:22.517Z/lambda-aws-python-http-api.zip"
               },
               "Handler": "handler.delete",
               "Runtime": "python3.9",
@@ -353,44 +393,54 @@
               "DeleteLogGroup"
             ]
           },
-          "CreateLambdaVersionwMvQTwYL7XpwSR7Xwr0ynmgrHwNQxoW7W23hrwJE": {
+          "CreateLambdaVersionC4UVYmnJ7D1oMDTkPJz7HlpZnw6rqdgol2o84XA9Q": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateLambdaFunction"
               },
-              "CodeSha256": "D1LOP5rplqVOCEMmnyjzBUxU6nQ8fJbsEJrbkawIJiM="
+              "CodeSha256": "FmAjtNS2M2srjiQVDlHJuSUOSOm3gVTmKFVE8xdqC6s="
             }
           },
-          "GetLambdaVersionepgu5VhOVxJaAiJVc2W2XaVMIPmkJDXA25Tz5TOfA": {
+          "GetLambdaVersionNOak0CiuDK14FgJv3YiTEzbHurWmZ5XykZykTpKr2A": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetLambdaFunction"
               },
-              "CodeSha256": "D1LOP5rplqVOCEMmnyjzBUxU6nQ8fJbsEJrbkawIJiM="
+              "CodeSha256": "FmAjtNS2M2srjiQVDlHJuSUOSOm3gVTmKFVE8xdqC6s="
             }
           },
-          "UpdateLambdaVersionSxnrLOpcTq5WWwqqfLWIl6NLvYiwjloqvcQf226kNM": {
+          "AllLambdaVersionfFYUmbTzcQY7RtsJdwxndfIxqD6BGw52iOElW4FbY8": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "AllLambdaFunction"
+              },
+              "CodeSha256": "FmAjtNS2M2srjiQVDlHJuSUOSOm3gVTmKFVE8xdqC6s="
+            }
+          },
+          "UpdateLambdaVersiongvQuxlqu6407jB3wOK9uoNXRFKsGoCmEhMfILCUelY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "UpdateLambdaFunction"
               },
-              "CodeSha256": "D1LOP5rplqVOCEMmnyjzBUxU6nQ8fJbsEJrbkawIJiM="
+              "CodeSha256": "FmAjtNS2M2srjiQVDlHJuSUOSOm3gVTmKFVE8xdqC6s="
             }
           },
-          "DeleteLambdaVersionF54sS8viJZoxAVtZ1OK9Gd7uwiJmiyrWp4wO7uVBIg": {
+          "DeleteLambdaVersionibASncMRG9hMVxKPjhJXoPO9yuWderWBgSzHEZs": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "DeleteLambdaFunction"
               },
-              "CodeSha256": "D1LOP5rplqVOCEMmnyjzBUxU6nQ8fJbsEJrbkawIJiM="
+              "CodeSha256": "FmAjtNS2M2srjiQVDlHJuSUOSOm3gVTmKFVE8xdqC6s="
             }
           },
           "ApiGatewayRestApi": {
@@ -450,7 +500,19 @@
               "ParentId": {
                 "Ref": "ApiGatewayResourcePostsGet"
               },
-              "PathPart": "{postID}",
+              "PathPart": "{postId}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourcePostsAll": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourcePosts"
+              },
+              "PathPart": "all",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -474,7 +536,7 @@
               "ParentId": {
                 "Ref": "ApiGatewayResourcePostsUpdate"
               },
-              "PathPart": "{postID}",
+              "PathPart": "{postId}",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -498,7 +560,7 @@
               "ParentId": {
                 "Ref": "ApiGatewayResourcePostsDelete"
               },
-              "PathPart": "{postID}",
+              "PathPart": "{postId}",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -596,6 +658,52 @@
               "GetLambdaPermissionApiGateway"
             ]
           },
+          "ApiGatewayMethodPostsAllGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourcePostsAll"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "AllLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "AllLambdaPermissionApiGateway"
+            ]
+          },
           "ApiGatewayMethodPostsUpdatePostidVarPut": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
@@ -688,7 +796,7 @@
               "DeleteLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1701586186025": {
+          "ApiGatewayDeployment1701617479649": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -699,6 +807,7 @@
             "DependsOn": [
               "ApiGatewayMethodPostsCreatePost",
               "ApiGatewayMethodPostsGetPostidVarGet",
+              "ApiGatewayMethodPostsAllGet",
               "ApiGatewayMethodPostsUpdatePostidVarPut",
               "ApiGatewayMethodPostsDeletePostidVarDelete"
             ]
@@ -746,6 +855,43 @@
               "FunctionName": {
                 "Fn::GetAtt": [
                   "GetLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "AllLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "AllLambdaFunction",
                   "Arn"
                 ]
               },
@@ -886,7 +1032,7 @@
           "CreateLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateLambdaVersionwMvQTwYL7XpwSR7Xwr0ynmgrHwNQxoW7W23hrwJE"
+              "Ref": "CreateLambdaVersionC4UVYmnJ7D1oMDTkPJz7HlpZnw6rqdgol2o84XA9Q"
             },
             "Export": {
               "Name": "sls-lambda-aws-python-http-api-dev-CreateLambdaFunctionQualifiedArn"
@@ -895,16 +1041,25 @@
           "GetLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetLambdaVersionepgu5VhOVxJaAiJVc2W2XaVMIPmkJDXA25Tz5TOfA"
+              "Ref": "GetLambdaVersionNOak0CiuDK14FgJv3YiTEzbHurWmZ5XykZykTpKr2A"
             },
             "Export": {
               "Name": "sls-lambda-aws-python-http-api-dev-GetLambdaFunctionQualifiedArn"
             }
           },
+          "AllLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "AllLambdaVersionfFYUmbTzcQY7RtsJdwxndfIxqD6BGw52iOElW4FbY8"
+            },
+            "Export": {
+              "Name": "sls-lambda-aws-python-http-api-dev-AllLambdaFunctionQualifiedArn"
+            }
+          },
           "UpdateLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UpdateLambdaVersionSxnrLOpcTq5WWwqqfLWIl6NLvYiwjloqvcQf226kNM"
+              "Ref": "UpdateLambdaVersiongvQuxlqu6407jB3wOK9uoNXRFKsGoCmEhMfILCUelY"
             },
             "Export": {
               "Name": "sls-lambda-aws-python-http-api-dev-UpdateLambdaFunctionQualifiedArn"
@@ -913,7 +1068,7 @@
           "DeleteLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DeleteLambdaVersionF54sS8viJZoxAVtZ1OK9Gd7uwiJmiyrWp4wO7uVBIg"
+              "Ref": "DeleteLambdaVersionibASncMRG9hMVxKPjhJXoPO9yuWderWBgSzHEZs"
             },
             "Export": {
               "Name": "sls-lambda-aws-python-http-api-dev-DeleteLambdaFunctionQualifiedArn"
@@ -1062,14 +1217,14 @@
         "timeout": 10,
         "runtime": "python3.9",
         "vpc": {},
-        "versionLogicalId": "CreateLambdaVersionwMvQTwYL7XpwSR7Xwr0ynmgrHwNQxoW7W23hrwJE"
+        "versionLogicalId": "CreateLambdaVersionC4UVYmnJ7D1oMDTkPJz7HlpZnw6rqdgol2o84XA9Q"
       },
       "get": {
         "handler": "handler.get",
         "events": [
           {
             "http": {
-              "path": "posts/get/{postID}",
+              "path": "posts/get/{postId}",
               "method": "get",
               "integration": "AWS_PROXY"
             }
@@ -1081,14 +1236,33 @@
         "timeout": 10,
         "runtime": "python3.9",
         "vpc": {},
-        "versionLogicalId": "GetLambdaVersionepgu5VhOVxJaAiJVc2W2XaVMIPmkJDXA25Tz5TOfA"
+        "versionLogicalId": "GetLambdaVersionNOak0CiuDK14FgJv3YiTEzbHurWmZ5XykZykTpKr2A"
+      },
+      "all": {
+        "handler": "handler.all",
+        "events": [
+          {
+            "http": {
+              "path": "posts/all",
+              "method": "get",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "lambda-aws-python-http-api-dev-all",
+        "package": {},
+        "memory": 128,
+        "timeout": 10,
+        "runtime": "python3.9",
+        "vpc": {},
+        "versionLogicalId": "AllLambdaVersionfFYUmbTzcQY7RtsJdwxndfIxqD6BGw52iOElW4FbY8"
       },
       "update": {
         "handler": "handler.update",
         "events": [
           {
             "http": {
-              "path": "posts/update/{postID}",
+              "path": "posts/update/{postId}",
               "method": "put",
               "integration": "AWS_PROXY"
             }
@@ -1100,14 +1274,14 @@
         "timeout": 10,
         "runtime": "python3.9",
         "vpc": {},
-        "versionLogicalId": "UpdateLambdaVersionSxnrLOpcTq5WWwqqfLWIl6NLvYiwjloqvcQf226kNM"
+        "versionLogicalId": "UpdateLambdaVersiongvQuxlqu6407jB3wOK9uoNXRFKsGoCmEhMfILCUelY"
       },
       "delete": {
         "handler": "handler.delete",
         "events": [
           {
             "http": {
-              "path": "posts/delete/{postID}",
+              "path": "posts/delete/{postId}",
               "method": "delete",
               "integration": "AWS_PROXY"
             }
@@ -1119,7 +1293,7 @@
         "timeout": 10,
         "runtime": "python3.9",
         "vpc": {},
-        "versionLogicalId": "DeleteLambdaVersionF54sS8viJZoxAVtZ1OK9Gd7uwiJmiyrWp4wO7uVBIg"
+        "versionLogicalId": "DeleteLambdaVersionibASncMRG9hMVxKPjhJXoPO9yuWderWBgSzHEZs"
       }
     },
     "resources": {
@@ -1175,7 +1349,7 @@
     "artifact": "/Users/swapnilzarbade/code/aws-lambda/lambda_aws_python_http_api/.serverless/lambda-aws-python-http-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/lambda-aws-python-http-api/dev/1701586188311-2023-12-03T06:49:48.311Z",
+    "artifactDirectoryName": "serverless/lambda-aws-python-http-api/dev/1701617482517-2023-12-03T15:31:22.517Z",
     "artifact": "lambda-aws-python-http-api.zip"
   }
 }

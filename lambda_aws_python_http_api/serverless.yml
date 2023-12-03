@@ -37,19 +37,25 @@ functions:
     handler: handler.get
     events:
       - http:
-          path: posts/get/{postID}
+          path: posts/get/{postId}
+          method: get
+  all:
+    handler: handler.all
+    events:
+      - http:
+          path: posts/all
           method: get
   update:
     handler: handler.update
     events:
       - http:
-          path: posts/update/{postID}
+          path: posts/update/{postId}
           method: put
   delete:
     handler: handler.delete
     events:
       - http:
-          path: posts/delete/{postID}
+          path: posts/delete/{postId}
           method: delete
 resources:
   Resources:
