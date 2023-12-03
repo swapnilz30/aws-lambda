@@ -1,8 +1,12 @@
 import json
+import logging
 
 print("Loading Function")
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def lambda_handler(event, context):
+    logger.info(f'Incoming request is: {event}')
     print("EVENT:::", event)
     print(event["key1"])
     print("context:::", context)
