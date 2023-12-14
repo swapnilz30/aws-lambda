@@ -12,5 +12,10 @@ def lambda_handler(event, context):
         "key2": "UP",
         "key3": "Goa"
     }
+    
+    print("Print info: ", body["key1"])
+    
+    for key, value in body.items():
+      print(f"{key}: {value}")
+    
     print(body)
-    print(response)
